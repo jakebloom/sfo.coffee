@@ -29,11 +29,13 @@
         const map = L.map('map').setView([37.75460102920216, -122.44260620284689], 13);
         const markers = [
             L.AwesomeMarkers.icon({markerColor: 'red'}),
+            L.AwesomeMarkers.icon({markerColor: 'orange'}),
             L.AwesomeMarkers.icon({markerColor: 'blue'}),
             L.AwesomeMarkers.icon({markerColor: 'green'}),
         ]
 
-        function addMarker(name, lat, lng, rating, review) {
+        function addMarker(name, latlong, rating, review) {
+            const [lat, lng] = latlong.split(',');
             L.marker([lat, lng], {icon: markers[rating - 1]}).addTo(map)
                 .bindPopup(`<b>${name}</b><br>${review}`);
         }
@@ -44,7 +46,7 @@
         }).addTo(map);
 
         fetch(
-            'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ9FrIATiVfkTRalKynUQxdfJdFTVSb5ZngmEwag1khgZ6lT5lUQCDt24vUDxFJA5CFuKbg5QKqQfRr/pub?output=csv',
+            'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ9FrIATiVfkTRalKynUQxdfJdFTVSb5ZngmEwag1khgZ6lT5lUQCDt24vUDxFJA5CFuKbg5QKqQfRr/pub?output=tsv',
             { redirect: 'manual' }
         ).then(response => {
             if (response.type === 'opaqueredirect') {
@@ -55,15 +57,13 @@
         .then(response => response.text())
         .then(data => {
             const rows = data.split('\n');
-            const headers = rows[0].split(',');
             rows.slice(1).map(row => {
-                const values = row.split(',');
+                const values = row.split('\t');
                 const name = values[0];
-                const lat = values[1];
-                const lng = values[2];
-                const rating = values[3];
-                const review = values[4];
-                addMarker(name, lat, lng, rating, review);
+                const latlong = values[1];
+                const rating = parseInt(values[2]);
+                const review = values[3];
+                addMarker(name, latlong, rating, review);
             });
         });
     </script>
