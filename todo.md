@@ -1,0 +1,4 @@
+- add more cafes
+- add legend
+- add about page
+- better default scaling for mobile
