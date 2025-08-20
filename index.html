@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jake's SF Coffee Guide</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+    
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.min.js"></script>
+    <style>
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        const map = L.map('map').setView([37.75460102920216, -122.44260620284689], 13);
+        const markers = [
+            L.AwesomeMarkers.icon({markerColor: 'red'}),
+            L.AwesomeMarkers.icon({markerColor: 'blue'}),
+            L.AwesomeMarkers.icon({markerColor: 'green'}),
+        ]
+
+        function addMarker(name, lat, lng, rating, review) {
+            L.marker([lat, lng], {icon: markers[rating - 1]}).addTo(map)
+                .bindPopup(`<b>${name}</b><br>${review}`);
+        }
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        fetch(
+            'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ9FrIATiVfkTRalKynUQxdfJdFTVSb5ZngmEwag1khgZ6lT5lUQCDt24vUDxFJA5CFuKbg5QKqQfRr/pub?output=csv',
+            { redirect: 'manual' }
+        ).then(response => {
+            if (response.type === 'opaqueredirect') {
+                return fetch(response.url);
+            }
+            return response;
+        })
+        .then(response => response.text())
+        .then(data => {
+            const rows = data.split('\n');
+            const headers = rows[0].split(',');
+            rows.slice(1).map(row => {
+                const values = row.split(',');
+                const name = values[0];
+                const lat = values[1];
+                const lng = values[2];
+                const rating = values[3];
+                const review = values[4];
+                addMarker(name, lat, lng, rating, review);
+            });
+        });
+    </script>
+</body>
+</html>
