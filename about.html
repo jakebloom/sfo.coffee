@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jake's SF Coffee Guide</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --accent: #007bff;
+            --border: #dee2e6;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #1a1a1a;
+                --bg-secondary: #2d2d2d;
+                --text-primary: #e9ecef;
+                --text-secondary: #adb5bd;
+                --accent: #4dabf7;
+                --border: #495057;
+                --shadow: rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        #about-content {
+            min-height: 100vh;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .container {
+            background-color: var(--bg-secondary);
+            padding: 3rem;
+            width: 100%;
+            height: 100%;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .legend-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .legend-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin-right: 12px;
+            border: 2px solid var(--border);
+        }
+
+        .contributors {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .back-link {
+            margin-bottom: 1rem;
+            width: 100%;
+            text-align: center;
+        }
+        .back-link a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            #about-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KN1L0STSPD"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-KN1L0STSPD');
+    </script>
+    <div id="about-content">
+        <div class="container">
+          <div class="back-link"><a href="index.html">← back to coffee</a></div>
+          <p>G'day, my name is Jake and unfortunately I drink coffee.</p>
+          <p>I didn't want to, in fact for most of my life I actively resisted drinking coffee. But then in 2019 the Rugby World Cup was on in Japan, which meant late nights and early mornings watching Australia get knocked out in the Quarter Finals. So I bought a Nespresso machine.</p>
+
+          <p>Many years later, due to the addictive nature of caffeine, I am still drinking coffee, and due to my Australian upbringing, I am very opinionated about the quality of the coffee I drink.</p>
+          
+          <p>So I made this map to document where you can find good coffee in San Francisco. I judge according to my own taste, and I like light/medium roasted coffee in a flat white. I don't have a sophisticated palate, but I do know when someone has burnt the coffee, scalded the milk, messed up my order or charges too much.</p>
+          
+          <p>The criteria for this is if I took a sip, nodded my head, and said “Yep. That’s a good coffee.”</p>
+          <div class="legend-section">
+            <div class="legend-title">Map Legend</div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #dc3545;"></div>
+              <span>I would rather not drink anything</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #ffc107;"></div>
+              <span>Mediocre, will work in a pinch</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background-color: #6f42c1;"></div>
+                <span>Yep, that's a good coffee</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color" style="background-color: #28a745;"></div>
+              <span>Best coffee in the city, or sentimenally special to me</span>
+            </div>
+          </div>
+          <div class="contributors">
+            <p>
+              Thanks to Steven, Russell, Harry, Noah and Anon for your contributions to the map.
+            </p>
+          </div>
+        </div>
+    </div>
+</body>
+</html>

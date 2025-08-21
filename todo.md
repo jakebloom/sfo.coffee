@@ -1,6 +1,0 @@
-- add legend
-- sort by rating
-- add about page
-- better default scaling for mobile
-- error handling
-- bracket handling
