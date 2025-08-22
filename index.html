@@ -122,7 +122,6 @@
                 }
             })
             .filter(row => row !== null)
-            .sort((a, b) => a.rating - b.rating)
             .forEach(row => addMarker(row.name, row.latlong, row.rating, row.review));
         });
     </script>
